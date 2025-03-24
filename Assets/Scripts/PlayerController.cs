@@ -89,4 +89,10 @@ public class PlayerController : MonoBehaviour
             SetCountText();
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Enemy")) {
+            Destroy(gameObject);
+        }
+    }
 }
