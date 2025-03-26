@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 5516470585807155688}
   - component: {fileID: 8151602929073051794}
   - component: {fileID: 7247011480499484482}
-  - component: {fileID: 4409537873554357656}
-  - component: {fileID: 8003345622469826106}
+  - component: {fileID: 8755317253481876550}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,7 +84,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.95, y: 0.95}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,40 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   count: 0
-  speed: 5
+  speed: 3.5
   countText: {fileID: 0}
---- !u!114 &4409537873554357656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7905158086587846635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!61 &8003345622469826106
-BoxCollider2D:
+--- !u!60 &8755317253481876550
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -202,10 +171,45 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.6, y: 1.6}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.95, y: 0.95}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4995349, y: 0.5017661}
+      - {x: -0.0020404458, y: 0.50025976}
+      - {x: -0.00053417776, y: 0.43850413}
+      - {x: -0.25056866, y: 0.43699828}
+      - {x: -0.25272173, y: 0.3779162}
+      - {x: -0.31408957, y: 0.37672177}
+      - {x: -0.31473026, y: 0.25239268}
+      - {x: -0.37786284, y: 0.25274506}
+      - {x: -0.37778458, y: 0.19221441}
+      - {x: -0.4411763, y: 0.19279473}
+      - {x: -0.4420214, y: 0.058972772}
+      - {x: -0.38420984, y: 0.05516761}
+      - {x: -0.38305515, y: -0.1165753}
+      - {x: -0.44168788, y: -0.11628187}
+      - {x: -0.4407958, y: -0.25543025}
+      - {x: -0.38065082, y: -0.25612548}
+      - {x: -0.38315764, y: -0.44559005}
+      - {x: -0.31784832, y: -0.44155172}
+      - {x: -0.31831047, y: -0.5045295}
+      - {x: 0.44395342, y: -0.5076364}
+      - {x: 0.44410768, y: -0.3728924}
+      - {x: 0.37820673, y: -0.37295774}
+      - {x: 0.38087317, y: -0.06046492}
+      - {x: 0.3140237, y: -0.061031394}
+      - {x: 0.3174854, y: 0.007547794}
+      - {x: 0.18881862, y: 0.009077965}
+      - {x: 0.19055243, y: 0.121714525}
+      - {x: 0.25368375, y: 0.124520704}
+      - {x: 0.2513582, y: 0.24747698}
+      - {x: 0.31489116, y: 0.24823277}
+      - {x: 0.31606203, y: 0.30948916}
+      - {x: 0.4373458, y: 0.3093523}
+      - {x: 0.4399003, y: 0.37340632}
+      - {x: 0.5017661, y: 0.37373623}
+  m_UseDelaunayMesh: 0

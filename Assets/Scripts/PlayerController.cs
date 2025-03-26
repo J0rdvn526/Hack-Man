@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -20,9 +20,12 @@ public class PlayerController : MonoBehaviour
     private float LowBound = -6.0f;
 
 
-    public float speed = 0;
+    public float speed = 0.0f;
     public TextMeshProUGUI countText;
 
+    public int lifeCount = 2;
+    private MenusBehaviour menuBehaviour;
+    private SpawnBehaviour spawn;
    
     void Start()
     {
@@ -36,25 +39,16 @@ public class PlayerController : MonoBehaviour
         SetCountText();
     }
 
-    /* 
-    void OnMove(InputValue movementValue) {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
-    }
-    */
-
     void SetCountText() {
         countText.text = count.ToString();
-        if (count == 105) {
+        if (count == 2520) {
             //Victory
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }
 
     private void FixedUpdate() {
-        // Vector2 movement = new Vector2(movementX, movementY);
-        // rb.AddForce(movement * speed);
+
         Vector2 direction = Vector2.zero;
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
             direction = up;
@@ -85,14 +79,29 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Pickup"))
         {
             col.gameObject.SetActive(false);
-            count = count + 1;
+            count = count + 24;
             SetCountText();
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Enemy")) {
-            Destroy(gameObject);
+            if (lifeCount > 0) {
+                reset();
+            } else {
+            // menuBehaviour.gotoGameOver();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+            }
         }
     }
+
+    void reset() {
+        gameObject.SetActive(false);
+        gameObject.transform.position = new Vector3(0.0f, -1.25f, 0.0f);
+        lifeCount = lifeCount - 1;
+        gameObject.SetActive(true);
+        // Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        // spawn.spawnEnemy();
+    }
+
 }

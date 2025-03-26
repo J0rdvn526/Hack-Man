@@ -1,35 +1,22 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform player;
-    private Vector3 target;
-    private NavMeshAgent agent;
+    public int speed;
+    private int moveTime;
+    private Rigidbody2D body;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetTarget();
-        SetAgentPosition();
+        Vector2 currentPos = body.position;
     }
-
-    void SetTarget() {
-        if (player != null) {
-            target = player.position;
-        }
-    }
-    void SetAgentPosition() {
-        if (player != null) {
-        agent.SetDestination(new Vector3(target.x, target.y, transform.position.z));
-        }
-    }
-        
     
 }
