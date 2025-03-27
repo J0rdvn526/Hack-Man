@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float moveTime = 0.5f;
+    public float moveTime = 1.0f;
     public float startTime;
 
     public float speed;
@@ -18,10 +18,10 @@ public class EnemyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        up = new Vector2(0.0f, 3.0f);
-        down = new Vector2(0.0f, -3.0f);
-        left = new Vector2(-3.0f, 0.0f);
-        right = new Vector2(3.0f, 0.0f);
+        up = new Vector2(0.0f, 5.0f);
+        down = new Vector2(0.0f, -5.0f);
+        left = new Vector2(-5.0f, 0.0f);
+        right = new Vector2(5.0f, 0.0f);
         movements = new Vector2[] {up, down, left, right};
         setTargetPosition();
     }
@@ -29,16 +29,18 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Every 'moveTime' seconds move in a random direction
         float currentTime = Time.time;
         float timeElapsed = currentTime - startTime;
         if (timeElapsed > moveTime) {
             setTargetPosition();
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime);
         }
+        transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime);
+        
     }
 
     void setTargetPosition() {
-        targetPosition = (Vector2)transform.position + movements[Random.Range(0, 3)];
+        targetPosition = (Vector2)transform.position + movements[Random.Range(0, 4)];
         startTime = Time.time;
     }
     

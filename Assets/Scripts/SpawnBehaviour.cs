@@ -11,12 +11,6 @@ public class SpawnBehaviour : MonoBehaviour
         spawnEnemy();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void spawnEnemy() {
         newEnemy = Instantiate(enemy, new Vector3(0.0f, 1.25f, 0.0f), Quaternion.identity);
     }
