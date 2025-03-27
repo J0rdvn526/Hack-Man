@@ -24,8 +24,18 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
 
     public int lifeCount = 2;
+    public GameObject LifeIcon;
     private MenusBehaviour menuBehaviour;
     private SpawnBehaviour spawn;
+
+    public AudioSource[] audiosources;
+
+    private IEnumerator WaitForSoundAndTransition(string sceneName) {
+        AudioSource source = GetComponent<AudioSource>();
+        audiosources[2].Play();
+        yield return new WaitForSeconds(source.clip.length); // wait for sound to finish
+        SceneManager.LoadScene(sceneName); // Load next scene
+    }
    
     void Start()
     {
@@ -44,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (count == 2520) {
             //Victory
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            audiosources[1].Play();
         }
     }
 
@@ -89,19 +100,20 @@ public class PlayerController : MonoBehaviour
             if (lifeCount > 0) {
                 reset();
             } else {
-            // menuBehaviour.gotoGameOver();
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+            StartCoroutine(WaitForSoundAndTransition("GameOver"));
+            // SceneManager.LoadScene("GameOver");
             }
         }
     }
 
     void reset() {
         gameObject.SetActive(false);
+        audiosources[0].Play();
         gameObject.transform.position = new Vector3(0.0f, -1.25f, 0.0f);
         lifeCount = lifeCount - 1;
         gameObject.SetActive(true);
-        // Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-        // spawn.spawnEnemy();
+        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        spawn.spawnEnemy();
     }
 
 }
