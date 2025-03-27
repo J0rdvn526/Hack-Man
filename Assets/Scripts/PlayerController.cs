@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText() {
         countText.text = count.ToString();
+        // 105 pickup objects
         if (count == 2520) {
             //Victory
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Pickups
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Pickup"))
         {
@@ -95,17 +97,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Enemy collision
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Enemy")) {
             if (lifeCount > 0) {
                 reset();
             } else {
             StartCoroutine(WaitForSoundAndTransition("GameOver"));
-            // SceneManager.LoadScene("GameOver");
             }
         }
     }
 
+    // Reset the player positions after a death
     void reset() {
         gameObject.SetActive(false);
         audiosources[0].Play();
@@ -114,6 +117,10 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(true);
         Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         spawn.spawnEnemy();
+    }
+
+    void teleport() {
+        float nothing;
     }
 
 }
