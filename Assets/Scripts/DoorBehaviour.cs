@@ -11,7 +11,7 @@ public class DoorBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float currentTime = Time.time;
         float elapsedTime = currentTime - timeSinceContact;

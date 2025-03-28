@@ -13,7 +13,7 @@ public class SpawnBehaviour : MonoBehaviour
         spawnEnemy();
     }
 
-    void Update() {
+    void FixedUpdate() {
         time = Time.time;
         if (time == 10 || time == 20) {
             spawnEnemy();

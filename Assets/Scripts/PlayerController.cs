@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
             col.gameObject.SetActive(false);
             count = count + 24;
             SetCountText();
+            SceneManager.LoadScene("Victory");
         }
     }
 
