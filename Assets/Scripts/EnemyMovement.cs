@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float moveTime = 1.0f;
-    public float startTime;
+    private float moveTime;
+    public float minTime = 0.25f;
+    public float maxTime = 1.25f;
+    private float startTime;
 
+
+    private float HighBound = 6.0f;
+    private float LowBound = -6.0f;
     public float speed;
     private Vector2 up;
     private Vector2 down;
@@ -18,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         up = new Vector2(0.0f, 5.0f);
         down = new Vector2(0.0f, -5.0f);
         left = new Vector2(-5.0f, 0.0f);
@@ -35,7 +41,16 @@ public class EnemyMovement : MonoBehaviour
         if (timeElapsed > moveTime) {
             setTargetPosition();
         }
+        moveTime = Random.Range(minTime, maxTime);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime);
+
+        // Portal
+        if (transform.position.y <= LowBound) {
+            transform.position = new Vector2(0.0f, HighBound - 0.1f);
+        }
+        if (transform.position.y >= HighBound) {
+            transform.position = new Vector2(0.0f, LowBound + 0.1f);
+        }
         
     }
 
@@ -44,4 +59,10 @@ public class EnemyMovement : MonoBehaviour
         startTime = Time.time;
     }
     
+    // Don't get stuck on walls or each other
+    void OnCollisionEnter2D (Collision2D other) {
+        if (other.gameObject.CompareTag("Wall") || other.gameObject.CompareTag("Enemy")) {
+            setTargetPosition();
+        }
+    }
 }

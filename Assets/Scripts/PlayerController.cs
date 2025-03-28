@@ -18,15 +18,20 @@ public class PlayerController : MonoBehaviour
     private Vector2 right;
     private float HighBound = 6.0f;
     private float LowBound = -6.0f;
-
+    private float distance;
 
     public float speed = 0.0f;
     public TextMeshProUGUI countText;
 
     public int lifeCount = 2;
     public GameObject LifeIcon;
-    private MenusBehaviour menuBehaviour;
-    private SpawnBehaviour spawn;
+    public GameObject LifeIcon1;
+    public GameObject LifeIcon2;
+    
+    public GameObject TeleportIcon;
+    public GameObject TeleportIcon1;
+
+    public AudioSource source;
 
     public AudioSource[] audiosources;
 
@@ -60,14 +65,16 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-
+    
         Vector2 direction = Vector2.zero;
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-            direction = up;
+                direction = up;
         } else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
             direction = down;
+            
         } else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
             direction = left;
+
         } else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
             direction = right;
         }
@@ -91,6 +98,8 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Pickup"))
         {
+            source = col.gameObject.GetComponent<AudioSource>();
+            source.Play();
             col.gameObject.SetActive(false);
             count = count + 24;
             SetCountText();
@@ -100,6 +109,13 @@ public class PlayerController : MonoBehaviour
     // Enemy collision
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Enemy")) {
+            if (lifeCount == 2) {
+            LifeIcon2.SetActive(false);
+        } else if (lifeCount == 1) {
+            LifeIcon1.SetActive(false);
+        } else if (lifeCount == 0) {
+            LifeIcon.SetActive(false);
+        }
             if (lifeCount > 0) {
                 reset();
             } else {
@@ -115,12 +131,12 @@ public class PlayerController : MonoBehaviour
         gameObject.transform.position = new Vector3(0.0f, -1.25f, 0.0f);
         lifeCount = lifeCount - 1;
         gameObject.SetActive(true);
-        Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-        spawn.spawnEnemy();
+        // Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+        // spawn.spawnEnemy();
     }
 
     void teleport() {
-        float nothing;
+        float mousePosG;
     }
 
 }
